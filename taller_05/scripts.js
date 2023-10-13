@@ -1,5 +1,4 @@
 const API = 'https://swapi.dev/api/people/'
-//const API = 'https://rickandmortyapi.com/api/character/'
 
 function personaje(texto) {
     let div = document.createElement('div')
