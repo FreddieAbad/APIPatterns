@@ -8,7 +8,7 @@ function get_replegal( filtro_replegal ) {
 
 function add_replegal( replegal ) {
     return new Promise((resolve, reject) => {
-        if (!replegal.nombre) {
+        if (!replegal.rucrep) {
             return reject('No existen datos.')
         }
         storage.add( replegal )

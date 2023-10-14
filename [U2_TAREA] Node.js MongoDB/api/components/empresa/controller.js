@@ -8,7 +8,7 @@ function get_empresa( filtro_empresa ) {
 
 function add_empresa( empresa ) {
     return new Promise((resolve, reject) => {
-        if (!empresa.nombre) {
+        if (!empresa.ruc) {
             return reject('No existen datos.')
         }
         storage.add( empresa )
