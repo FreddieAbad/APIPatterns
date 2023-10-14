@@ -1,18 +1,18 @@
 const storage = require('./storage')
 
-function get_empresa( filtroEmpresa ) {
+function get_empresa( filtro_empresa ) {
     return new Promise((resolve, reject) => {
-        resolve( storage.get( filtroEmpresa ) )
+        resolve( storage.get( filtro_empresa ) )
     })
 }
 
 function add_empresa( empresa ) {
     return new Promise((resolve, reject) => {
-        if (!empresa.ruc || !empresa.nombre || !empresa.domicilio || !empresa.telefono) {
-            return reject('No hay datos suficientes.')
+        if (!empresa.nombre) {
+            return reject('No existen datos.')
         }
         storage.add( empresa )
-        resolve( empresa )        
+        resolve( empresa )  
     })
 }
 
@@ -27,10 +27,10 @@ function update_empresa( empresa ) {
     })
 }
 
-function delete_empresa( ruc ) {
+function delete_empresa( empresa ) {
     return new Promise((resolve, reject) => {
-        storage.delete( ruc )
-        resolve( ruc )
+        storage.delete( empresa )
+        resolve( empresa )
     })
 }
 

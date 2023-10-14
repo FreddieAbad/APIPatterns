@@ -6,13 +6,9 @@ const req_string = {
     required: true,
 }
 
-const empresa_schema = new Schema({
+const replegal_schema = new Schema({
     nombre: req_string,
-    empresa: {
-        type: Schema.ObjectId,
-        ref: 'empresa',
-    },
 })
 
-const model = mongoose.model('empresa', empresa_schema)
+const model = mongoose.model('replegal', replegal_schema)
 module.exports = model

@@ -1,8 +1,8 @@
-const representantelegal = require('../components/representantelegal/interface')
+const replegal = require('../components/replegal/interface')
 const empresa = require('../components/empresa/interface')
 
 const routes = function(server) {
-    server.use('/representantelegal', representantelegal)
+    server.use('/replegal', replegal)
     server.use('/empresa', empresa)
 }
 
