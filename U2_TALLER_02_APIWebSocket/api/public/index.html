@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Datos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="app.css">
+    <style>
+        table, th, td {
+          border-collapse: collapse;
+          border-bottom: 1px solid #000; 
+        }
+      </style>
+      
 </head>
+
 <body>
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <h2>Formulario de Datos</h2>
+        <div class="row ">
+            <div class="col-md-6 offset-md-3 glassmorphism">
+                <h2 style="text-align: center;">Representante Legal</h2>
                 <form>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="ruc" class="form-label">RUC</label>
-                                <input type="text" class="form-control" id="ruc" name="ruc" placeholder="Ingrese su RUC">
+                                <input type="text" class="form-control" id="ruc" name="ruc"
+                                    placeholder="Ingrese su RUC">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="cedula" class="form-label">Cédula</label>
-                                <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Ingrese su Cédula">
+                                <input type="text" class="form-control" id="cedula" name="cedula"
+                                    placeholder="Ingrese su Cédula">
                             </div>
                         </div>
                     </div>
@@ -30,13 +43,15 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su Nombre">
+                                <input type="text" class="form-control" id="nombre" name="nombre"
+                                    placeholder="Ingrese su Nombre">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="apellido" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="apellido" name "apellido" placeholder="Ingrese su Apellido">
+                                <input type="text" class="form-control" id="apellido" name="apellido"
+                                    placeholder="Ingrese su Apellido">
                             </div>
                         </div>
                     </div>
@@ -44,34 +59,87 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su Email">
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="Ingrese su Email">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="telefono" class="form-label">Teléfono</label>
-                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese su Teléfono">
+                                <input type="text" class="form-control" id="telefono" name="telefono"
+                                    placeholder="Ingrese su Teléfono">
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="domicilio" class="form-label">Domicilio</label>
-                        <input type="text" class="form-control" id="domicilio" name="domicilio" placeholder="Ingrese su Domicilio">
+                        <input type="text" class="form-control" id="domicilio" name="domicilio"
+                            placeholder="Ingrese su Domicilio">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-12">
+                        <button type="button" class="btn btn-primary" onclick="generarValores()">Generar Valores
+                            Aleatorios</button>
+                    </div>
+                    <br>
+                    <div class="row">
                         <label for="empresa" class="form-label">Empresa</label>
-                        <select class="form-select" id="empresa" name="empresa">
-                            <option value="empresa1">Empresa 1</option>
-                            <option value="empresa2">Empresa 2</option>
-                            <option value="empresa3">Empresa 3</option>
-                        </select>
+                        <div class="col-md-9">
+                            <div class="mb-3">
+                                <select class="form-select" id="empresa" name="empresa">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <button  class="btn btn-warning" id="agregarEmpresaBtn">Agregar</button>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <div class="row" style="padding-bottom: 50px;" >
+                        <table style="padding-bottom: 10px;" >
+                            <thead >
+                                <tr>
+                                    <th style="padding-left: 20px;">ID</th>
+                                    <th>Nombre</th>
+                                </tr>
+                            </thead>
+                            <tbody id="empresaTable">
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="enviarBtn">Enviar</button>
+
                 </form>
+                <div id="alertContainer" class="mt-3"></div>
+
+            </div>
+        </div>
+        <div class="row " style="margin-top: 50px;margin-bottom: 50px;">
+            <div class="glassmorphism">
+                <h2 style="text-align: center;"> Listado de Representante Legal</h2>
+                 
+                <div class="row" style="padding-bottom: 50px;" >
+                    <table style="padding-bottom: 10px;" >
+                        <thead >
+                            <tr>
+                                <th>ID</th>
+                                <th>RUC</th>
+                                <th>Cedula</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Email</th>
+                                <th>Domicilio</th>
+                                <th>Telefono</th>
+                                <th>Empresas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="repLegalTable">
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

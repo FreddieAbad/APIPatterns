@@ -1,0 +1,9 @@
+/* app.css */
+.glassmorphism {
+    background: rgba(173, 216, 230, 0.6); /* Azul cielo */
+    border-radius: 10px;
+    border: 1px solid rgba(173, 216, 230, 0.7); /* Borde azul cielo */
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(173, 216, 230, 0.3); /* Sombra azul cielo */
+    padding: 50px;
+}
