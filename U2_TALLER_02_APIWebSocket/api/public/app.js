@@ -3,8 +3,6 @@ window.addEventListener('load', function () {
     fetch('http://localhost:3001/empresa')
         .then(response => response.json())
         .then(data => {
-            console.log('Datos de la API REST:', data);
-            console.log('Datos de la API REST:', data["body"]);
             const select = document.getElementById('empresa');
             data["body"].forEach(empresa => {
                 const option = document.createElement('option');
@@ -22,7 +20,6 @@ window.addEventListener('load', function () {
     fetch('http://localhost:3001/replegal')
         .then(response => response.json())
         .then(data => {
-            console.log('Datos de la API REST:', data);
             const repLegalTable = document.getElementById('repLegalTable');
             repLegalTable.innerHTML = '';
             data["body"].forEach(repLegal => {
@@ -93,6 +90,21 @@ function generarValores() {
     document.getElementById('telefono').value = generarNumeroAleatorio();
     document.getElementById('domicilio').value = generarValorAlfanumerico();
 }
+function encerarValores() {
+    document.getElementById('ruc').value = "";
+    document.getElementById('cedula').value = "";
+    document.getElementById('nombre').value = "";
+    document.getElementById('apellido').value = "";
+    document.getElementById('email').value = "";
+    document.getElementById('telefono').value = "";
+    document.getElementById('domicilio').value = "";
+    const empresaTable = document.getElementById('empresaTable');
+
+    while (empresaTable.rows.length > 0) {
+        empresaTable.deleteRow(0);
+    }
+
+}
 function mostrarAlerta(titulo, mensaje, tipo) {
     const alertaHTML = `
         <div class="alert ${tipo} alert-dismissible fade show" role="alert">
@@ -110,7 +122,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const agregarEmpresaBtn = document.getElementById('agregarEmpresaBtn');
 
     enviarBtn.addEventListener('click', function () {
-    // console.log(" ZZZ "+filas.);
+        const valoresCeldas = [];
+
+        for (let i = 0; i < filas.length; i++) {
+            const fila = filas[i];
+            const celdas = fila.getElementsByTagName('td');
+            console.log('Fila ' + i + ': ' + celdas[0].textContent.toString());
+            valoresCeldas.push({ "empresa_detalle": celdas[0].textContent.toString() });
+        }
 
         const ruc = document.getElementById('ruc').value;
         const cedula = document.getElementById('cedula').value;
@@ -119,14 +138,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const email = document.getElementById('email').value;
         const telefono = document.getElementById('telefono').value;
         const domicilio = document.getElementById('domicilio').value;
-        const empresaDetalle = document.getElementById('empresa').value;
+        //const empresaDetalle = document.getElementById('empresa').value;
 
-        if (ruc === '' || cedula === '' || nombre === '' || apellido === '' || email === '' || telefono === '' || domicilio === '' ) {
+        if (ruc === '' || cedula === '' || nombre === '' || apellido === '' || email === '' || telefono === '' || domicilio === '') {
             mostrarAlerta('Campos Vacíos', 'Por favor, complete todos los campos antes de enviar.', 'alert-warning');
-        } else if(filas.length == 0){
+        } else if (filas.length == 0) {
             mostrarAlerta('Campos Vacíos', 'Por favor, agregar al menos una empresa.', 'alert-warning');
         }
-        else{
+        else {
             const formData = {
                 rucrep: ruc,
                 cedula: cedula,
@@ -135,12 +154,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 email: email,
                 domicilio: domicilio,
                 telefono: telefono,
-                representante_detalle: [{
-                    empresa_detalle: empresaDetalle
-                }]
+                // representante_detalle: [{
+                //     empresa_detalle: empresaDetalle
+                // }]
+                representante_detalle: valoresCeldas
             };
-            const tiempoEspera = 5 * 60 * 1000; // 5 minutos en milisegundos
-            setTimeout(miFuncion, tiempoEspera);
 
             fetch('http://localhost:3001/replegal', {
                 method: 'POST',
@@ -151,6 +169,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
                 .then(response => {
                     if (response.ok) {
+                        encerarValores();
                         mostrarAlerta('Inserción Correcta', 'La inserción se realizó correctamente.', 'alert-success');
                         return response.json();
                     } else {
