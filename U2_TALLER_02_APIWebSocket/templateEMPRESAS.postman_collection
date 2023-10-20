@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "867552a2-05ba-43af-ac28-8bf490b681dc",
+		"name": "EMPRESAS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6924648"
+	},
+	"item": [
+		{
+			"name": "GET EMPRESAS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4001/empresa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"empresa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET REPRESENTANTE",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4001/replegal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"replegal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST REP LEGAL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rucrep\": \"0104660434001\",\r\n    \"cedula\": \"0105260434\",\r\n    \"nombre\": \"juan\",\r\n    \"apellido\": \"Lituma\",\r\n    \"email\": \"Adrian@gmail.com\",\r\n    \"domicilio\": \"remigiotamariz\",\r\n    \"telefono\": \"0983564810\",\r\n    \"representante_detalle\": [\r\n        {\r\n            \"empresa_detalle\": \"652addfcae4adcfbc0760a4c\"\r\n        },\r\n        {\r\n            \"empresa_detalle\": \"652addfcae4adcfbc0760a4c\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/representante",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"representante"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST EMPRESA",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ruc\": \"929979753\",\r\n  \"nombre\": \"Industrias Verdes\",\r\n  \"domicilio\": \"46 Calle Secundaria, Los Alamos, Ambato, Ecuador\",\r\n  \"telefono\": \"906756507\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/empresa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"empresa"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
