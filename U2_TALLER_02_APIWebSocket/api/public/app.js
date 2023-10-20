@@ -1,13 +1,15 @@
 
+
+
 window.addEventListener('load', function () {
-    fetch('http://localhost:3001/empresa')
+    fetch('http://localhost:4001/empresa')
         .then(response => response.json())
         .then(data => {
             const select = document.getElementById('empresa');
             data["body"].forEach(empresa => {
                 const option = document.createElement('option');
                 option.value = empresa._id;
-                option.textContent = "Nombre: " + empresa.nombre + " RUC: " + empresa.ruc;
+                option.textContent =  empresa.nombre + " || RUC: " + empresa.ruc;
                 select.appendChild(option);
             });
         })
@@ -17,49 +19,32 @@ window.addEventListener('load', function () {
 
 
 
-    fetch('http://localhost:3001/replegal')
+    fetch('http://localhost:4001/replegal')
         .then(response => response.json())
         .then(data => {
             const repLegalTable = document.getElementById('repLegalTable');
             repLegalTable.innerHTML = '';
             data["body"].forEach(repLegal => {
                 const newRow = repLegalTable.insertRow();
-                const cell1 = newRow.insertCell(0);
-                const cell2 = newRow.insertCell(1);
-                const cell3 = newRow.insertCell(2);
-                const cell4 = newRow.insertCell(3);
-                const cell5 = newRow.insertCell(4);
-                const cell6 = newRow.insertCell(5);
-                const cell7 = newRow.insertCell(6);
-                const cell8 = newRow.insertCell(7);
-                const cell9 = newRow.insertCell(8);
+                const cells = Array.from({ length: 3 }, () => newRow.insertCell());
 
-                const representanteDetalle = repLegal.representante_detalle;
+                const representanteDetalleText = repLegal.representante_detalle.map(obj => {
+                    return `<br><b>Empresa:</b> ${obj._id}`;
+                  }).join('\n');
+                  
 
-                let representanteDetalleText = '';
+                cells[0].innerHTML = "<br><b>Identificador:</b> " + repLegal._id;
 
-                representanteDetalle.forEach(obj => {
-                    for (const key in obj) {
-                        if (obj.hasOwnProperty(key)) {
-                            representanteDetalleText += `${key}: ${obj[key]}, `;
-                        }
-                    }
-                });
 
-                if (representanteDetalleText.endsWith(', ')) {
-                    representanteDetalleText = representanteDetalleText.slice(0, -2);
-                }
-                cell1.innerHTML = repLegal._id;
-                cell2.innerHTML = repLegal.rucrep;
-                cell3.innerHTML = repLegal.cedula;
-                cell4.innerHTML = repLegal.nombre;
-                cell5.innerHTML = repLegal.apellido;
-                cell6.innerHTML = repLegal.email;
-                cell7.innerHTML = repLegal.domicilio;
-                cell8.innerHTML = repLegal.telefono;
-                cell9.innerHTML = representanteDetalleText;
+                cells[1].innerHTML = "<br><b>RUC:</b> " + repLegal.rucrep +
+                    "<br><b>Cedula:</b> " + repLegal.cedula +
+                    "<br><b>Nombre:</b> " + repLegal.nombre +
+                    "<br><b>Apellido:</b> " + repLegal.apellido +
+                    "<br><b>Email:</b> " + repLegal.email +
+                    "<br><b>Domicilio:</b> " + repLegal.domicilio +
+                    "<br><b>Telefono:</b> " + repLegal.telefono;
+                cells[2].innerHTML = representanteDetalleText;
             });
-
         })
         .catch(error => {
             console.error('Error al obtener datos de la API REST:', error);
@@ -69,9 +54,145 @@ window.addEventListener('load', function () {
 
 
 
+
 function generarNumeroAleatorio() {
     return Math.floor(Math.random() * 900000000 + 100000000).toString();
 }
+function nombreAlAzar() {
+    const nombres = [
+        "Luis",
+        "Ana",
+        "Juan",
+        "María",
+        "Carlos",
+        "Laura",
+        "Pedro",
+        "Isabel",
+        "José",
+        "Sofía",
+        "Andrés",
+        "Lucía",
+        "Javier",
+        "Valentina",
+        "Miguel",
+        "Camila",
+        "Ricardo",
+        "Lorena",
+        "Fernando",
+        "Elena",
+        "Gabriel",
+        "Carmen",
+        "David",
+        "Julia",
+        "Manuel",
+        "Beatriz",
+        "Raúl",
+        "Natalia",
+        "Alejandro",
+        "Patricia",
+        "Daniel",
+        "Rosa",
+        "Alberto",
+        "Luisa",
+        "Víctor",
+        "Susana",
+        "Óscar",
+        "Martha",
+        "Roberto",
+        "Teresa",
+        "Pablo",
+        "Claudia",
+        "Héctor",
+        "Liliana",
+        "Diego",
+        "Adriana",
+        "Fabián",
+        "Paula"
+    ];
+
+    const indiceAleatorio = Math.floor(Math.random() * nombres.length);
+    return nombres[indiceAleatorio];
+}
+function apellidoAlAzar() {
+    const apellidos = [
+        "González",
+        "Rodríguez",
+        "López",
+        "Martínez",
+        "Pérez",
+        "García",
+        "Fernández",
+        "Sánchez",
+        "Ramírez",
+        "Torres",
+        "Flores",
+        "Vásquez",
+        "Díaz",
+        "Jiménez",
+        "Morales",
+        "Romero",
+        "Hernández",
+        "Silva",
+        "Muñoz",
+        "Ortiz",
+        "Castro",
+        "Ruiz",
+        "Núñez",
+        "Vargas",
+        "Mendoza",
+        "Guerrero",
+        "Rojas",
+        "Soto",
+        "Luna",
+        "Ortega",
+        "Cabrera",
+        "Navarro",
+        "Solís",
+        "Zamora",
+        "Sosa",
+        "Espinoza",
+        "Villanueva",
+        "Aguilar",
+        "Giménez",
+        "Paredes",
+        "Arias",
+        "Campos",
+        "Cortez",
+        "Figueroa",
+        "Estrada",
+        "Reyes",
+        "Vega",
+        "Valenzuela",
+        "Salazar"
+    ];
+
+    const indiceAleatorio = Math.floor(Math.random() * apellidos.length);
+    return apellidos[indiceAleatorio];
+}
+function emailAlAzar(nombre, apellido) {
+    const dominios = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "example.com"];
+    const nombreSinEspacios = nombre.toLowerCase().replace(/\s/g, "");
+    const apellidoSinEspacios = apellido.toLowerCase().replace(/\s/g, "");
+    const dominioAleatorio = dominios[Math.floor(Math.random() * dominios.length)];
+    const numeroAleatorio = Math.floor(Math.random() * 1000);
+
+    const email = `${nombreSinEspacios}.${apellidoSinEspacios}${numeroAleatorio}@${dominioAleatorio}`;
+    return email;
+}
+
+function direccionDomicilioEcuador() {
+    const ciudades = ["Quito", "Guayaquil", "Cuenca", "Manta", "Ambato", "Loja", "Esmeraldas", "Santo Domingo", "Portoviejo", "Ibarra"];
+    const barrios = ["Centro", "La Floresta", "Kennedy", "San Blas", "Los Alamos", "El Bosque", "La Mariscal", "Las Orquídeas", "La Carolina", "San Isidro"];
+    const calles = ["Avenida Principal", "Calle Secundaria", "Calle de Ejemplo", "Avenida Principal Norte", "Avenida de los Pájaros", "Calle del Sol", "Avenida del Río"];
+    
+    const ciudadAleatoria = ciudades[Math.floor(Math.random() * ciudades.length)];
+    const barrioAleatorio = barrios[Math.floor(Math.random() * barrios.length)];
+    const calleAleatoria = calles[Math.floor(Math.random() * calles.length)];
+    const numeroAleatorio = Math.floor(Math.random() * 100);
+  
+    const direccion = `${numeroAleatorio} ${calleAleatoria}, ${barrioAleatorio}, ${ciudadAleatoria}, Ecuador`;
+    return direccion;
+  }
 
 function generarValorAlfanumerico() {
     const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -82,13 +203,16 @@ function generarValorAlfanumerico() {
     return resultado;
 }
 function generarValores() {
+    const nombreAleatorio = nombreAlAzar();
+    const apellidoAleatorio = apellidoAlAzar();
+
     document.getElementById('ruc').value = generarNumeroAleatorio();
     document.getElementById('cedula').value = generarNumeroAleatorio();
-    document.getElementById('nombre').value = "Nombre " + generarValorAlfanumerico();
-    document.getElementById('apellido').value = "Apellido " + generarValorAlfanumerico();
-    document.getElementById('email').value = generarValorAlfanumerico() + "@gmail.com";
+    document.getElementById('nombre').value = nombreAleatorio;
+    document.getElementById('apellido').value = apellidoAleatorio;
+    document.getElementById('email').value = emailAlAzar(nombreAleatorio, apellidoAleatorio);
     document.getElementById('telefono').value = generarNumeroAleatorio();
-    document.getElementById('domicilio').value = generarValorAlfanumerico();
+    document.getElementById('domicilio').value = direccionDomicilioEcuador() ;
 }
 function encerarValores() {
     document.getElementById('ruc').value = "";
@@ -105,7 +229,7 @@ function encerarValores() {
     }
 
 }
-function mostrarAlerta(titulo, mensaje, tipo) {
+function mostrarAlertaRL(titulo, mensaje, tipo) {
     const alertaHTML = `
         <div class="alert ${tipo} alert-dismissible fade show" role="alert">
             <strong>${titulo}</strong> ${mensaje}
@@ -114,6 +238,30 @@ function mostrarAlerta(titulo, mensaje, tipo) {
     `;
     alertContainer.innerHTML = alertaHTML;
 }
+
+function notifyServer(titulo, mensaje, tipo) {
+    const alertaHTML = `
+        <div class="alert ${tipo} alert-dismissible fade show" role="alert">
+            <strong>${titulo}</strong> ${mensaje}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `;
+    noti.innerHTML = alertaHTML;
+}
+var socket = io.connect('http://localhost:4001', {
+    forceNet: true
+});
+
+function notiAlerta() {
+    socket.emit('agregar', { mensaje: 'Mensaje de prueba' });
+
+    socket.on('respuesta', function (data) {
+        mostrarAlertaRL('Inserción Correcta', 'Guardado en Base', 'alert-success');
+        notifyServer('Mensaje Servidor:', data.mensaje, 'alert-warning');
+        console.log('Respuesta del servidor:', data.mensaje);
+    });
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
     const enviarBtn = document.getElementById('enviarBtn');
@@ -138,12 +286,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const email = document.getElementById('email').value;
         const telefono = document.getElementById('telefono').value;
         const domicilio = document.getElementById('domicilio').value;
-        //const empresaDetalle = document.getElementById('empresa').value;
 
         if (ruc === '' || cedula === '' || nombre === '' || apellido === '' || email === '' || telefono === '' || domicilio === '') {
-            mostrarAlerta('Campos Vacíos', 'Por favor, complete todos los campos antes de enviar.', 'alert-warning');
+            mostrarAlertaRL('Campos Vacíos', 'Por favor, complete todos los campos antes de enviar.', 'alert-warning');
         } else if (filas.length == 0) {
-            mostrarAlerta('Campos Vacíos', 'Por favor, agregar al menos una empresa.', 'alert-warning');
+            mostrarAlertaRL('Campos Vacíos', 'Por favor, agregar al menos una empresa.', 'alert-warning');
         }
         else {
             const formData = {
@@ -154,13 +301,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 email: email,
                 domicilio: domicilio,
                 telefono: telefono,
-                // representante_detalle: [{
-                //     empresa_detalle: empresaDetalle
-                // }]
                 representante_detalle: valoresCeldas
             };
 
-            fetch('http://localhost:3001/replegal', {
+            fetch('http://localhost:4001/replegal', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -170,10 +314,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(response => {
                     if (response.ok) {
                         encerarValores();
-                        mostrarAlerta('Inserción Correcta', 'La inserción se realizó correctamente.', 'alert-success');
+                        notiAlerta();
                         return response.json();
+
                     } else {
-                        mostrarAlerta('Error de Inserción', 'Hubo errores al realizar la inserción.', 'alert-danger');
+                        mostrarAlertaRL('Error de Inserción', 'Hubo errores al realizar la inserción.', 'alert-danger');
                         throw new Error('Error en la solicitud POST');
                     }
                 })
@@ -182,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
                 .catch(error => {
                     console.error('Error al enviar la solicitud POST:', error);
-                    mostrarAlerta('Error de Inserción', 'Hubo errores al realizar la inserción.', 'alert-danger');
+                    mostrarAlertaRL('Error de Inserción', 'Hubo errores al realizar la inserción.', 'alert-danger');
                 });
         }
     });

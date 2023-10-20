@@ -1,30 +1,28 @@
-const express = require('express')
-const body_parser = require('body-parser')
-const path = require('path'); 
-const config = require('./config')
-const routes = require('./network/routes')
-const db = require('./db')
-// const winston = require('winston');
+const express = require('express');
+const bodyParser = require('body-parser');
+const config = require('./config');
+const routes = require('./network/routes');
+const db = require('./db');
 
-var app = express()
-db( config.DB_URL )
+var app = express();
+db(config.DB_URL);
 
-app.use( body_parser.json() )
-app.use( body_parser.urlencoded({extended: false}) )
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/', express.static('public'));
 
-app.use(express.static(path.join(__dirname, 'public')));
+routes(app);
 
-routes( app )
-// // Configura un logger personalizado
-// const logger = winston.createLogger({
-//     level: 'info', // Nivel de registro
-//     format: winston.format.simple(), // Formato del registro
-//     transports: [
-//       new winston.transports.Console() // Salida de logs en la consola
-//     ]
-//   });
-  
-app.listen( config.PORT )
-console.log(`La aplicacion se encuentra arriba en http://localhost:${config.PORT}/`)
-// logger.info('Este es un mensaje de información.');
-// logger.error('Este es un mensaje de error.');
+const server = app.listen(config.PORT, () => {
+    console.log(`La app está lista en http://localhost:${config.PORT}/`);
+});
+
+const io = require('socket.io')(server);
+
+io.on('connection', function (socket) {
+    console.log('Cliente conectado');
+
+    socket.on('agregar', function (data) {
+        socket.emit('respuesta', { mensaje: 'Una nueva empresa se ha agregado' });
+    });
+});
