@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "867552a2-05ba-43af-ac28-8bf490b681dc",
-		"name": "EMPRESAS",
+		"_postman_id": "da3a1387-ba6b-4a23-a1cf-34dba94523d7",
+		"name": "EMPRESAS Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "6924648"
 	},
@@ -65,7 +65,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"rucrep\": \"0104660434001\",\r\n    \"cedula\": \"0105260434\",\r\n    \"nombre\": \"juan\",\r\n    \"apellido\": \"Lituma\",\r\n    \"email\": \"Adrian@gmail.com\",\r\n    \"domicilio\": \"remigiotamariz\",\r\n    \"telefono\": \"0983564810\",\r\n    \"representante_detalle\": [\r\n        {\r\n            \"empresa_detalle\": \"652addfcae4adcfbc0760a4c\"\r\n        },\r\n        {\r\n            \"empresa_detalle\": \"652addfcae4adcfbc0760a4c\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"rucrep\": \"777450029\",\r\n    \"cedula\": \"171242080\",\r\n    \"nombre\": \"Rosa\",\r\n    \"apellido\": \"Guerrero\",\r\n    \"email\": \"rosa.guerrero458@outlook.com\",\r\n    \"domicilio\": \"86 Avenida del Río, San Isidro, Manta, Ecuador\",\r\n    \"telefono\": \"884220435\",\r\n    \"representante_detalle\": [\r\n        {\r\n            \"empresa_detalle\": \"653211982128225c857d33d5\"\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -73,14 +73,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3001/representante",
+					"raw": "http://localhost:4001/replegal",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3001",
+					"port": "4001",
 					"path": [
-						"representante"
+						"replegal"
 					]
 				}
 			},

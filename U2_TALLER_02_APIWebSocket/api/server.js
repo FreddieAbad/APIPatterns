@@ -25,4 +25,12 @@ io.on('connection', function (socket) {
     socket.on('agregar', function (data) {
         socket.emit('respuesta', { mensaje: 'Una nueva empresa se ha agregado' });
     });
+
+    socket.on('agregarEmpresa', function (data) {
+        io.emit('repLegalAgregado', { mensaje: 'Una nueva empresa se ha agregado' });
+    });
+
 });
+
+module.exports = io;
+
