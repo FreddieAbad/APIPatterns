@@ -1,0 +1,27 @@
+/* app.css */
+.glassmorphism {
+    background: rgba(56, 100, 114, 0.6);
+    border-radius: 10px;
+    border: 1px solid rgba(173, 216, 230, 0.7);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(173, 216, 230, 0.3);
+    padding: 50px;
+}
+
+input:hover {
+    background-color: #ffcc00;
+}
+
+.btn {
+    background-color: #004e97;
+    color: #fff;
+}
+
+.btn:hover {
+    background-color: #011d38;
+    cursor: pointer;
+}
+
+input:hover {
+    border-color: #004e97;
+}

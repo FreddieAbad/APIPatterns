@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "da3a1387-ba6b-4a23-a1cf-34dba94523d7",
+		"name": "EMPRESAS Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6924648"
+	},
+	"item": [
+		{
+			"name": "GET EMPRESAS",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4001/empresa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"empresa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET REPRESENTANTE",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:4001/replegal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"replegal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST REP LEGAL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rucrep\": \"777450029\",\r\n    \"cedula\": \"171242080\",\r\n    \"nombre\": \"Rosa\",\r\n    \"apellido\": \"Guerrero\",\r\n    \"email\": \"rosa.guerrero458@outlook.com\",\r\n    \"domicilio\": \"86 Avenida del Río, San Isidro, Manta, Ecuador\",\r\n    \"telefono\": \"884220435\",\r\n    \"representante_detalle\": [\r\n        {\r\n            \"empresa_detalle\": \"653211982128225c857d33d5\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/replegal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"replegal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST EMPRESA",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"ruc\": \"929979753\",\r\n  \"nombre\": \"Industrias Verdes\",\r\n  \"domicilio\": \"46 Calle Secundaria, Los Alamos, Ambato, Ecuador\",\r\n  \"telefono\": \"906756507\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/empresa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"empresa"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
