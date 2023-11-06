@@ -187,7 +187,10 @@ function registrarUsuario() {
                     encerarValores();
                     // notiAlerta();
                     mostrarAlertaRL('Inserción Correcta', 'Guardado en Base', 'alert-success');
-
+                    // Redirigir a otra página HTML
+                    setTimeout(function() {                    
+                        window.location.href = "http://localhost:4001/login.html";
+                    }, 5000);
                     return response.json();
 
                 } else {

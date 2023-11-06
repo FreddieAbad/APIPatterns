@@ -14,7 +14,10 @@ const usuario_schema = new Schema({
     username: req_string,
     password: req_string,
     rol: req_string
-})
+});
+usuario_schema.statics.findByUsername = function (username) {
+    return this.findOne(username);
+};
 
 const model = mongoose.model('usuario', usuario_schema)
 module.exports = model
