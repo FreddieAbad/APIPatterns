@@ -21,13 +21,22 @@ function loginUsuario() {
             .then(response => {
                 if (response.ok) {
                     // encerarValores();
-                    mostrarAlertaRL('Login Correcto', 'Validacion exitosa', 'alert-success');
+                    mostrarAlertaRL('Login Correcto', 'Validacion exitosa, rol admin', 'alert-success');
                     setTimeout(function() {                    
                         window.location.href = "http://localhost:4001/index.html";
                     }, 4000);
                     return response.json();
 
-                } if (response.status != 401) {
+                } if (response.status == 406) {
+                    mostrarAlertaRL('Datos correctos', 'Login correcto, rol usuario', 'alert-warning');
+                    //mostrarAlertaRL('Login Correcto', 'Validacion exitosa', 'alert-success');
+                    setTimeout(function() {                    
+                        window.location.href = "http://localhost:4001/index2.html";
+                    }, 4000);
+                    return response.json();
+
+
+                }  if (response.status != 401) {
                     mostrarAlertaRL('Datos incorrectos', 'Validar datos ingresados', 'alert-warning');
                     return response.json();
                 } else {

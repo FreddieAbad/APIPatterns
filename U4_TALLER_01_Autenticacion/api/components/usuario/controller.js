@@ -33,9 +33,11 @@ async function login(username, password) {
             if (!passwordMatch) {
                 return reject({ status: 405, message: 'Contraseña incorrecta.' });
             }
+            if (usuario.rol != "admin") {
+                return reject({ status: 406, message: 'Credenciales correctas, rol usuario.' });
+            }
             resolve({ status: 200, message: 'Inicio de sesión exitoso' });
         } catch (error) {
-//            reject('Error en la autenticación: ' + error);
             reject({ status: 401, message: 'Error en la autenticación: ' + error });
 
         }
