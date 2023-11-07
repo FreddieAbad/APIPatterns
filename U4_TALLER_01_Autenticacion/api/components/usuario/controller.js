@@ -19,7 +19,7 @@ function add_usuario(usuario) {
 async function login(username, password) {
     return new Promise(async (resolve, reject) => {
         if (!username || !password) {
-            return reject('Nombre de usuario y contraseña son requeridos.');
+            return reject({ status: 400, message: 'Nombre de usuario y contraseña son requeridos.' });
         }
 
         try {
@@ -27,15 +27,17 @@ async function login(username, password) {
             console.log("## " + nombre + "- " + username.toString());
             const usuario = await storage.find(nombre);
             if (!usuario) {
-                return reject('Usuario no encontrado.');
+                return reject({ status: 404, message: 'Usuario no encontrado.' });
             }
             const passwordMatch = await comparePassword(password, usuario.password);
             if (!passwordMatch) {
-                return reject('Contraseña incorrecta.');
+                return reject({ status: 405, message: 'Contraseña incorrecta.' });
             }
-            resolve('Inicio de sesión exitoso');
+            resolve({ status: 200, message: 'Inicio de sesión exitoso' });
         } catch (error) {
-            reject('Error en la autenticación: ' + error);
+//            reject('Error en la autenticación: ' + error);
+            reject({ status: 401, message: 'Error en la autenticación: ' + error });
+
         }
     });
 }

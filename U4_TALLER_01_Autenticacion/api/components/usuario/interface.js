@@ -23,10 +23,12 @@ route.post('/login', function (req, res) {
     const { username, password } = req.body;
     console.log(">>> "+username +  password);
     controller.login(username, password)
-        .then((data) => response.success(req, res, data, 200))
+        .then((data) => {
+            console.log(data);
+            response.success(req, res, data, 200)})
         .catch((error) => {
             console.log(error);
-            response.error(req, res, error, 401);});
+            response.error(req, res, error, error.status);});
 });
 
 module.exports = route

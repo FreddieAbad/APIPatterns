@@ -27,7 +27,7 @@ function loginUsuario() {
                     }, 4000);
                     return response.json();
 
-                } if (response.status == 401) {
+                } if (response.status != 401) {
                     mostrarAlertaRL('Datos incorrectos', 'Validar datos ingresados', 'alert-warning');
                     return response.json();
                 } else {
